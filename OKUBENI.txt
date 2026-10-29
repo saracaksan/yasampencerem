@@ -1,0 +1,32 @@
+YAŞAM BECERİLERİ PORTALI - TELEFON UYGULAMASI (PWA) KURULUMU
+=============================================================
+
+1) Apps Script'te doGet zaten sayfanın uygulama içinde açılmasına izin verir (Code.gs son sürümde
+   XFrameOptionsMode.ALLOWALL vardır). Güncel Code.gs ve Index.html'i yapıştırdıysanız:
+   Dağıt > Dağıtımları yönet > (kalem) > Sürüm: "Yeni sürüm" > Dağıt.
+   Web uygulaması URL'sini kopyalayın ("/exec" ile biter). "Erişimi olanlar: Herkes" olmalıdır.
+
+2) index.html dosyasında APP_URL satırına bu adresi yapıştırın.
+
+3) Bu klasörün TÜM içeriğini (index.html, manifest.json, sw.js, icons klasörü) GitHub Pages deponuza,
+   örneğin  ktun-isg-web/yasam-becerileri/  klasörüne yükleyin. Adres şöyle olur:
+   https://saracaksan.github.io/ktun-isg-web/yasam-becerileri/
+   (Farklı bir depo/klasör kullanırsanız adres de ona göre olur; dosyalar aynı klasörde kalmalıdır.)
+
+4) Telefonda bu adresi açın:
+   - ANDROID (Chrome): menü (⋮) > "Ana ekrana ekle" / "Uygulamayı yükle".
+   - iPHONE (Safari): Paylaş düğmesi > "Ana Ekrana Ekle".
+   Ana ekranda "Yaşam Becerileri" simgesi çıkar; tam ekran, adres çubuğu olmadan açılır.
+   Velilere yalnızca bu GitHub Pages adresini gönderin.
+
+5) (İsteğe bağlı) Android APK/AAB dosyası: https://www.pwabuilder.com adresine 3. adımdaki adresi
+   yapıştırın, "Package for stores" > Android seçin. APK'yı gruba doğrudan dağıtabilirsiniz
+   (Play Store şart değil).
+
+BİLİNEN SINIRLAR (telefonunuzda mutlaka deneyin):
+ - Bazı tarayıcılarda (özellikle iPhone/Safari) iç içe sayfalarda "beni hatırla" (oturum hatırlama)
+   kısıtlanabilir; bu durumda her açılışta giriş istenebilir. Bu olursa velilere doğrudan Apps Script
+   adresini ana ekrana eklemelerini önerin (sistem içindeki "Telefona yükle" düğmesi bunu anlatır).
+ - Portal internetsiz çalışmaz (veriler Google'dadır). Çevrimdışıyken yalnızca açılış ekranı görünür.
+ - Güncellemeler Apps Script'ten yayınlanınca otomatik yansır; bu klasörü yeniden yüklemek gerekmez
+   (yalnızca APP_URL değişirse).

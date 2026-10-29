@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#c9822b">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Yaşam Becerileri">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <title>Yaşam Becerileri Portalı</title>
+  <style>
+    html, body { margin: 0; height: 100%; background: #f4efe4; overflow: hidden; font-family: 'Segoe UI', Tahoma, sans-serif; }
+    #app { position: fixed; inset: 0; width: 100%; height: 100%; border: 0; background: #f4efe4; padding-top: env(safe-area-inset-top); box-sizing: border-box; }
+    #yukleniyor { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; color: #2b2a26; text-align: center; padding: 24px; background: #f4efe4; z-index: 5; transition: opacity .3s; }
+    #yukleniyor img { width: 96px; height: 96px; border-radius: 22px; }
+    .halka { width: 38px; height: 38px; border: 4px solid rgba(43,42,38,.15); border-top-color: #c9822b; border-radius: 50%; animation: don 1s linear infinite; }
+    @keyframes don { to { transform: rotate(360deg); } }
+    a.btn, button.btn { display: inline-block; background: #c9822b; color: #fff; font-weight: 700; border: 0; border-radius: 999px; padding: 12px 22px; text-decoration: none; font-size: 1rem; }
+    #sorun { display: none; font-size: .9rem; color: #6d6556; }
+    #cevrimdisi { display: none; }
+  </style>
+</head>
+<body>
+  <div id="yukleniyor">
+    <img src="icons/icon-192.png" alt="Yaşam Becerileri">
+    <div style="font-weight:800; font-size:1.2rem;">Yaşam Becerileri Portalı</div>
+    <div class="halka" id="halka"></div>
+    <div id="sorun">Açılması uzun sürdü. <a class="btn" id="tarayici" href="#" target="_blank" rel="noopener">Tarayıcıda aç</a></div>
+    <div id="cevrimdisi">İnternet bağlantısı yok. Bağlandığınızda portal açılır.<br><br><button class="btn" onclick="location.reload()">Tekrar dene</button></div>
+  </div>
+
+  <iframe id="app" title="Yaşam Becerileri Portalı" allow="fullscreen; clipboard-write" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+  <script>
+    // ====== BURAYA KENDİ ADRESİNİZİ YAZIN (Apps Script > Dağıt > Web uygulaması URL'si, "/exec" ile biter) ======
+    const APP_URL = 'https://script.google.com/macros/s/AKfycbyY5lKAudg1q6pr7Sofwvp0H_T6XCLSWc4QoCvS5Zn1lRPS2HN4NMH56Ne2fcaRB9KXBg/exec';
+    // ========================================================================================================
+
+    const fr = document.getElementById('app');
+    const ekran = document.getElementById('yukleniyor');
+    document.getElementById('tarayici').href = APP_URL;
+
+    function ac() {
+      if (/BURAYA_/.test(APP_URL)) { document.getElementById('halka').style.display = 'none'; document.getElementById('sorun').style.display = 'block'; document.getElementById('sorun').textContent = 'Portal adresi ayarlanmamış: index.html içindeki APP_URL satırına Apps Script web uygulaması adresini yazın.'; return; }
+      if (!navigator.onLine) { document.getElementById('halka').style.display = 'none'; document.getElementById('cevrimdisi').style.display = 'block'; return; }
+      fr.src = APP_URL;
+    }
+    fr.addEventListener('load', function() {
+      if (fr.src && fr.src.indexOf('script.google.com') > -1) { ekran.style.opacity = '0'; setTimeout(() => ekran.style.display = 'none', 350); }
+    });
+    setTimeout(() => { if (ekran.style.display !== 'none' && !/BURAYA_/.test(APP_URL)) document.getElementById('sorun').style.display = 'block'; }, 12000);
+    window.addEventListener('online', ac);
+    ac();
+
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+  </script>
+</body>
+</html>
