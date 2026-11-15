@@ -30,3 +30,7 @@ BİLİNEN SINIRLAR (telefonunuzda mutlaka deneyin):
  - Portal internetsiz çalışmaz (veriler Google'dadır). Çevrimdışıyken yalnızca açılış ekranı görünür.
  - Güncellemeler Apps Script'ten yayınlanınca otomatik yansır; bu klasörü yeniden yüklemek gerekmez
    (yalnızca APP_URL değişirse).
+
+GÜNCELLEME NOTU (WhatsApp Mesaj Merkezi sürümü)
+- Yalnızca sw.js içindeki önbellek adı değişti (yasam-kabuk-v2). GitHub'a bu klasörün dosyalarını yeniden yüklemeniz yeterli;
+  telefondaki uygulama bir sonraki açılışta kendini günceller. WhatsApp modülü Apps Script tarafındadır (Index.html), buraya dosya eklenmez.

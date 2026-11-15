@@ -1,6 +1,6 @@
 // Basit servis çalışanı: uygulama kabuğunu (açılış ekranı, simgeler) önbelleğe alır.
 // Portalın kendisi (Google Apps Script) her zaman internetten canlı yüklenir; öğrenci ve gözlem verileri asla önbelleğe alınmaz.
-const CACHE = 'yasam-kabuk-v1';
+const CACHE = 'yasam-kabuk-v2';
 const KABUK = ['./', './index.html', './manifest.json', './icons/icon-192.png', './icons/icon-512.png'];
 
 self.addEventListener('install', e => {
